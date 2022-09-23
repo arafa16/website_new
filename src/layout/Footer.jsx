@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <div className="relative w-full min-h-20 ">
             <div className="flex justify-center py-0 px-0">
-                <div className='h-96 w-full flex '>
+                <div className='h-full w-full flex '>
                     {/* <div className='w-1/5 h-full bg-teal-800 px-10 pt-11'>
                         <Logo className="max-h-20 bg-white mb-4 " />
                         <p className='text-white mb-4'>HEAD OFFICE</p>
@@ -32,16 +32,14 @@ const Footer = () => {
                     </div> */}
                     <div className='w-full h-full bg-teal-600 px-10 pt-[3rem] '>
                         <p className='lg:mx-3 text-xl text-white'>MENU UTAMA <hr /></p>
-                        <ul className='flex'>
+                        <ul className='lg:flex'>
                             {Menus.map((menu, index)=>(
                                 <li key={index} className='lg:mx-9 text-xs text-white my-4'>
                                     {menu.name} <hr />
                                     <ul>
                                     {menu.subs ? 
                                     menu.subs.map((sub, index)=>(
-                                        
-                                            <li className='my-3'>{sub.name} <hr /></li>
-    
+                                            <li className='lg:my-3 my-4 hidde'>{sub.name} <hr /></li>
                                     ))
                                     :
                                     ''

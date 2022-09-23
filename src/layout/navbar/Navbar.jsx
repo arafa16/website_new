@@ -1,43 +1,56 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {Link} from "react-router-dom";
 import Dropdown from './Dropdown';
+import {Menus} from './ListMenu';
 
 const Navbar = ({openMenu}) => {
-    let Menus = [
-        {id: 1, name: "HOME", link:"/", subs:[
-            {id: 1, name: "Sub 1", link: "/sub"},
-            {id: 2, name: "Sub 2", link: "/sub"},
-            {id: 3, name: "Sub 3", link: "/sub"},
-        ] },
-        {id: 2, name: "ABOUT US", link:"/" },
-        {id: 3, name: "PRODUCT & SERVICE", link:"/product" },
-        {id: 4, name: "PROJECT PORTOFOLIO", link:"/" },
-        {id: 5, name: "NEWS & EVENT", link:"/", subs:[
-            {id: 4, name: "Sub 1", link: "/sub"},
-            {id: 5, name: "Sub 2", link: "/sub"},
-            {id: 6, name: "Sub 3", link: "/sub"},
-        ] },
-        {id: 6, name: "CAREER", link:"/" },
-        {id: 7, name: "CONTACT US", link:"/" },
-    ];
+    
+    const [openSub, setOpenSub] = useState(Menus);
 
-    const [openSub, setOpenSub] = useState(false);
+    let menuRef = useRef();
 
-  return (
-    <div>
-      <ul className={`lg:flex lg:static lg:items-center absolute bg-white lg:pb-0 pb-4 lg:pl-0 pl-5 right-0 lg:items-center lg:shadow-none shadow-md lg:w-auto w-[12rem] lg:z-0 z-[-1] mr-7 transition-all duration-500 ease-in ${openMenu ? 'top-[77px]' : 'top-[-490px]' }  `}>
-        {Menus.map((menu, index)=>(
-            <li key={index} className="lg:ml-8 lg:mt-0 mt-5">
-                <Link to={menu.link} className="text-gray-800 hover:text-gray-400 duration:500" onClick={()=> setOpenSub(!openSub)} >{menu.name}</Link>
-                {menu.subs ? 
-                    <Dropdown submenus={menu.subs} openSub={openSub} />
-                    : ''
-                }
-            </li>
-        ))}
-    </ul>
-    </div>
-  )
+    useEffect(()=>{
+        let handleMenu = (event) => {
+            if(!menuRef.current.contains(event.target)){
+                setOpenSub(Menus);
+            }
+        }
+
+        document.addEventListener("mousedown", handleMenu);
+
+        return () => {
+            document.removeEventListener("mousedown", handleMenu);
+        };
+    })
+    
+
+    const clickHandler = name => () => {
+        setOpenSub(items => 
+            items.map(item => ({
+                ...item,
+                active: item.name === name
+            }))
+        );
+    };
+
+    return (
+        <div className='flex'>
+            <ul className={`lg:flex lg:static lg:items-center absolute bg-white lg:pb-0 pb-4 lg:pl-0 pl-5 right-0 lg:items-center lg:shadow-none shadow-md lg:w-auto w-[16rem] lg:z-0 z-[-1] mr-7 transition-all duration-500 ease-in ${openMenu ? 'top-[77px]' : 'top-[-790px]' }  `}>
+                {openSub.map( (item, index) =>(
+                   <li ref={menuRef} key={index} className={`lg:mx-4 lg:my-0 my-4 text-gray-800 hover:text-gray-400 cursor-pointer `} onClick={clickHandler(item.name)}>
+                        <Link to={`${item.subs ? '' : item.link}`}>{item.name}</Link>
+                        {item.subs ? 
+                            <Dropdown submenus={item.subs} openSub={item.active} />
+                            : ''
+                        }
+                    </li> 
+                ))}
+            </ul>
+            <div className="lg:static absolute right-20 top-6 text-gray-800 hover:text-gray-400 cursor-pointer">
+                EN | ID
+            </div>
+        </div>
+    )
 }
 
 export default Navbar

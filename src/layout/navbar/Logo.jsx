@@ -1,9 +1,10 @@
 import React from 'react'
 
-const Logo = () => {
+const Logo = (props) => {
+  const {children, className} = props;
   return (
     <div className="cursor-pointer items-center flex">
-        <img className="max-h-10" src={require('../../assets/images/logo.png')} />
+        <img className={className} src={require('../../assets/images/logo.png')} />
     </div>
   )
 }

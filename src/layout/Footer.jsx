@@ -5,8 +5,8 @@ const Footer = () => {
 
     return (
         <div className="min-h-20 bg-gray-100 ">
-            <div className="mb-4 mx-4 flex">
-                <div className='bg-teal-700 w-1/4 py-4 px-6 rounded-tr-[60px] rounded-bl-[60px]'>
+            <div className="mb-4 mx-4 lg:flex">
+                <div className='bg-teal-600 lg:w-1/4 w-auto py-4 px-6 rounded-tr-[60px] rounded-bl-[60px] mb-4'>
                     <Logo className="max-h-20 bg-white mb-4 " />
                     <p className='text-white mb-4'>HEAD OFFICE</p>
                     <p className='text-white text-sm mb-4 leading-8'>
@@ -15,7 +15,7 @@ const Footer = () => {
                     Kel. Lebak Bulus Kec. Cilandak
                     Jakarta Selatan, DKI Jakarta 12440
                     </p>
-                    <p className='text-white text-sm leading-10'>
+                    <p className='text-white text-sm leading-10 mb-4'>
                         Telp.  021 7590 9424<br/>
                         <hr/>
                         Fax.  021 2920 3466<br/>
@@ -24,7 +24,7 @@ const Footer = () => {
                         <hr/>
                     </p>
                 </div>
-                <div className='bg-teal-800 w-3/4 ml-4 py-4 px-6 text-white leading-8 rounded-bl-[70px] rounded-tr-[70px]'>
+                <div className='bg-teal-600 lg:w-3/4 w-auto ml-4 py-4 px-6 text-white leading-8 rounded-bl-[70px] rounded-tr-[70px]'>
                     <p className='ml-2 text-2xl mb-4'>WE ARE ALWAYS READY</p>
                     <p className='ml-2'>REQUEST A CALL BACK</p>
                     <p className='ml-2'>For further information on our product and services, please contact us at the following address or simply fill in the form below and our representative will respond to you as soon as possible.</p>
@@ -45,7 +45,7 @@ const Footer = () => {
                             <textarea type='text' className='w-full px-4' placeholder='Comments or Questions' />
                         </div>
                         <div className='w-full text-right mr-2 mb-4'>
-                            <button className='bg-white hover:bg-gray-300 text-teal-800 font-bold py-0 px-4 rounded ml-2 w-96 '>Submit</button>
+                            <button className='bg-white hover:bg-gray-300 text-teal-800 font-bold py-0 px-4 rounded ml-2 lg:w-96 w-full '>Submit</button>
                         </div>
                         
                     </form>
@@ -62,7 +62,7 @@ const Footer = () => {
                                     <ul>
                                     {menu.subs ? 
                                     menu.subs.map((sub, index)=>(
-                                            <li className='lg:my-3 my-4 hidde'>{sub.name} <hr /></li>
+                                            <li key={index} className='lg:my-3 my-4 hidde'>{sub.name} <hr /></li>
                                     ))
                                     :
                                     ''
